@@ -15,7 +15,8 @@ function MainModule(listingsID = "#listings") {
   // holds the currently loaded listings and which ones are selected to compare
   let allListings = [];
   const selectedIds = new Set();
- 
+
+  <!-- You were very thorough with the way you escaped and parsed the data -->
   // basic escaping since we're building HTML with template strings from
   // fields that come straight out of the dataset
   function escapeHTML(str) {
@@ -63,7 +64,10 @@ function MainModule(listingsID = "#listings") {
     const amenities = parseAmenities(listing.amenities);
     const topAmenities = amenities.slice(0, 5);
     const isSelected = selectedIds.has(listing.id);
- 
+
+    /* Something seems to be wrong with the onerror attribute. When I view it in a browser
+       the card seems to be moving up and down in a glitchy way. I think it has to do with
+       the placeholder for img. */
     return `<div class="col-4">
   <div class="listing card ${isSelected ? "is-comparing" : ""}" data-id="${listing.id}">
     <img
@@ -87,7 +91,9 @@ function MainModule(listingsID = "#listings") {
       <div class="price-tag">${formatPrice(listing.price)} / night</div>
  
       <p class="card-text">${escapeHTML(truncate(listing.description, 140))}</p>
- 
+
+     /* I like how you made badges for the amenities. It really distinguishes them from the other content.
+        I also like how you limited them to 5. I listed them all and for some listings that was a lot. */
       <div class="amenities mb-2">
         ${topAmenities
           .map(
